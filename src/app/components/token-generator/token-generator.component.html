@@ -1,0 +1,24 @@
+<div class="token-generator">
+    <h2>Generar Token</h2>
+    <input (ngModel)="cliente" placeholder="Ingrese el ID del cliente" />
+    <button (click)="generateToken()">Generar Token</button>
+  
+    <div *ngIf="generatedToken">
+      <p>Token generado: {{ generatedToken }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage">
+      <p class="error">{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <div class="token-generator">
+    <h2>Generar Token</h2>
+    <input (ngModel)="cliente" placeholder="Ingrese el ID del cliente" />
+    <button (click)="showModal()">Ver Token</button>
+  
+    <!-- Modal para mostrar el token y el tiempo de validez -->
+    <app-token-modal *ngIf="isModalVisible" [userId]="cliente"></app-token-modal>
+  </div>
+  
+  

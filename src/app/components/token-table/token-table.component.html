@@ -1,0 +1,23 @@
+<div class="token-table">
+    <input type="text" (input)="filterTokens($event.target)" placeholder="Filtrar por ID de usuario o token..." />
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID Usuario</th>
+          <th>Token</th>
+          <th>Fecha de Expiración</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let token of filteredTokens">
+          <td>{{ token.userId }}</td>
+          <td>{{ token.value }}</td>
+          <td>{{ token.expiresAt | date: 'medium' }}</td>
+          <td>{{ token.isActive ? 'Activo' : 'Expirado' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

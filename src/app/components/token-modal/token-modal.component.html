@@ -1,0 +1,13 @@
+<div class="modal-container">
+    <div class="modal-content">
+      <h3>Token Generado</h3>
+      <div *ngIf="token">
+        <p><strong>Token:</strong> {{ token }}</p>
+        <p><strong>Expira en:</strong> {{ expiresAt | date: 'medium' }}</p>
+      </div>
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  
