@@ -1,74 +1,35 @@
 .token-table {
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  input {
-    width: 98%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-  
-  input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  th, td {
-    padding: 12px 15px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #007bff;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-weight: 600;
-    border-bottom: 2px solid #0056b3;
-  }
-  
-  td {
-    border-bottom: 1px solid #ddd;
-    color: #333;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.3s;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .token-table {
-      padding: 10px;
-    }
-  
-    th, td {
-      padding: 10px;
-      font-size: 14px;
-    }
-  
-    input {
-      font-size: 14px;
-    }
-  }
-  
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #007bff;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}

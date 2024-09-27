@@ -35,14 +35,22 @@ export class TokenGeneratorComponent {
     if (this.cliente) {
       this.tokenService.generateToken(this.cliente).subscribe(
         (response) => {
-          this.generatedToken = response.token;
-          this.countdown = Math.floor((new Date(response.feCreacion).getTime() - new Date().getTime()) / 1000); // Inicializa el countdown
-          this.startCountdown();
-          this.isModalVisible = true;
-          this.isTokenGenerated = true; // Bloquea el input del cliente
+          if (response.errorCode == 0){
+            this.generatedToken = response.token.token;
+
+            const expirationTime = new Date(response.token.feCreacion).getTime() + 60000; 
+            this.countdown = Math.floor((expirationTime - new Date().getTime()) / 1000);
+            this.startCountdown();
+            this.isModalVisible = true;
+            this.isTokenGenerated = true;
+
+            this.tokenService.setClienteId(this.cliente);
+          }else{
+            alert('Error al generar el token. Verifica los datos.');
+          }
         },
         (error) => {
-          alert('Error al generar el token. Verifica los datos.');
+          alert('Hubo un error al consultar.');
         }
       );
     } else {
@@ -53,7 +61,7 @@ export class TokenGeneratorComponent {
   // Inicia el temporizador de cuenta regresiva
   startCountdown() {
     this.interval = setInterval(() => {
-      if (this.countdown > 0) {
+      if (this.countdown > -1) {
         this.countdown--;
       } else {
         clearInterval(this.interval);
@@ -71,11 +79,18 @@ export class TokenGeneratorComponent {
 
   // Método para validar el token ingresado
   validateToken() {
-    if (this.enteredToken === this.generatedToken) {
-      this.router.navigate(['/tokens-table']); // Redirige a la tabla de tokens si la validación es exitosa
-    } else {
-      this.validationError = 'El token ingresado es incorrecto.';
-    }
+    this.tokenService.useToken(this.cliente,this.enteredToken).subscribe(
+      (response) => {
+        if (response.errorCode == 0){
+          this.router.navigate(['/tokens-table']);
+        }else{
+          alert('Error al generar el token. Verifica los datos.');
+        }
+      },
+      (error) => {
+        alert('Hubo un error al consultar.');
+      }
+    );
   }
 
   // Limpieza cuando se destruye el componente

@@ -7,7 +7,7 @@
       placeholder="Ingrese el ID del cliente" 
       [disabled]="isTokenGenerated" 
     />
-    <button (click)="generateToken()" [disabled]="isTokenGenerated">Generar Token</button>
+    <button (click)="generateToken()"  *ngIf="!isTokenGenerated">Generar Token</button>
   
     <!-- Modal que muestra el token generado y el temporizador -->
     <div *ngIf="isModalVisible" class="modal-container">
@@ -21,7 +21,7 @@
   
     <!-- Campo para ingresar el token y validarlo, visible solo después de generar el token -->
     <div *ngIf="isTokenGenerated && !isModalVisible">
-      <input (ngModel)="enteredToken" placeholder="Ingrese el token para validar" />
+      <input [(ngModel)]="enteredToken" placeholder="Ingrese el token para validar" />
       <button (click)="validateToken()">Validar</button>
       <p *ngIf="validationError" class="error">{{ validationError }}</p>
     </div>

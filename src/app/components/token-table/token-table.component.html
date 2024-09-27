@@ -1,23 +1,40 @@
 <div class="token-table">
-    <input type="text" (input)="filterTokens($event.target)" placeholder="Filtrar por ID de usuario o token..." />
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID Usuario</th>
-          <th>Token</th>
-          <th>Fecha de Expiración</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let token of filteredTokens">
-          <td>{{ token.userId }}</td>
-          <td>{{ token.value }}</td>
-          <td>{{ token.expiresAt | date: 'medium' }}</td>
-          <td>{{ token.isActive ? 'Activo' : 'Expirado' }}</td>
-        </tr>
-      </tbody>
+    <!-- Barra de búsqueda para filtrar los resultados de la tabla -->
+    <mat-form-field appearance="fill" class="search-bar">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar por ID de usuario o token">
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef> ID Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Token </th>
+        <td mat-cell *matCellDef="let element"> {{element.token}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="expiresAt">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Creación </th>
+        <td mat-cell *matCellDef="let element"> {{element.feCreacion | date:'medium'}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.isActive ? 'Activo' : 'Expirado'}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+  
+    <!-- Paginador para navegar por los tokens -->
+    <mat-paginator [length]="tokens.length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
   </div>
   
